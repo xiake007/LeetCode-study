@@ -6,12 +6,39 @@ using namespace std;
 class Solution {
 public:
 	vector<int> addToArrayForm(vector<int>& A, int K) {
+		int idx = 0;
+		int a_n = A.size();
+		int add_flag = 0;
+		int tmp = 0;
+		while (idx < a_n || K >0) {
+			if (idx < a_n && K >0) {
+				tmp = A[a_n - 1 - idx] + K % 10 + add_flag;
+				A[a_n - 1 - idx] = tmp % 10;
+				K /= 10;
+			}
+			else if (idx < a_n) {
+				tmp = A[a_n - 1 - idx] + add_flag;
+				A[a_n - 1 - idx] = tmp % 10;
+			}
+			else {
+				tmp = K % 10 + add_flag;
+				A.insert(A.begin(), tmp % 10);
+				K /= 10;
+			}
+			add_flag = tmp / 10;
+			idx++;
+		}
+		if (add_flag > 0) {
+			A.insert(A.begin(), add_flag);
+		}
+		return A;
+	}
+	vector<int> addToArrayForm2(vector<int>& A, int K) {
 		vector<int> B;
-		while (K / 10 > 0) {
+		while (K > 0) {
 			B.push_back(K % 10);
 			K /= 10;
 		}
-		B.push_back(K % 10);
 		vector<int> c;
 		int idx = 0;
 		int a_n = A.size();
