@@ -6,6 +6,20 @@ using namespace std;
 class Solution {
 public:
 	vector<int> addToArrayForm(vector<int>& A, int K) {
+		int N = A.size();
+		int idx = N-1;
+		vector<int> ans;
+		while (idx >=0 || K>0) {
+			if (idx >= 0) {
+				K += A[idx--];
+			}
+			ans.push_back(K % 10);
+			K /= 10;
+		}
+		reverse(ans.begin(), ans.end());
+		return ans;
+	}
+	vector<int> addToArrayForm3(vector<int>& A, int K) {
 		int idx = 0;
 		int a_n = A.size();
 		int add_flag = 0;
