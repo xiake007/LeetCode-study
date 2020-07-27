@@ -6,6 +6,7 @@ using namespace std;
 class Solution {
 public:    
 	int removeDuplicates(vector<int>& nums) {
+		if (nums.size() == 0) return 0;
 		int idx_pre = 0;
 		for (int idx_next = 1; idx_next < nums.size(); idx_next++) {
 			if (nums[idx_pre] != nums[idx_next]) {
